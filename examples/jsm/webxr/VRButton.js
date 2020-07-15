@@ -17,14 +17,33 @@ var VRButton = {
 
 			var currentSession = null;
 
-			function onSessionStarted( session ) {
+			function onSessionAvailable() {
 
+				if ( currentSession === null ) {
+
+					// WebXR's requestReferenceSpace only works if the corresponding feature
+					// was requested at session creation time. For simplicity, just ask for
+					// the interesting ones as optional features, but be aware that the
+					// requestReferenceSpace call will fail if it turns out to be unavailable.
+					// ('local' is always available for immersive sessions and doesn't need to
+					// be requested separately.)
+
+			    console.log("REQUESTING SESSION");
+					var sessionInit = { optionalFeatures: [ 'local-floor', 'bounded-floor' ] };
+					navigator.xr.requestSession( 'immersive-vr', sessionInit ).then( onSessionStarted );
+				}
+
+			}
+
+			function onSessionStarted( session ) {
+			    console.log("SESSION STARTING");
 				session.addEventListener( 'end', onSessionEnded );
 
 				renderer.xr.setSession( session );
 				button.textContent = 'EXIT VR';
 
 				currentSession = session;
+			    console.log("SESSION STARTED");
 
 			}
 
@@ -64,15 +83,7 @@ var VRButton = {
 
 				if ( currentSession === null ) {
 
-					// WebXR's requestReferenceSpace only works if the corresponding feature
-					// was requested at session creation time. For simplicity, just ask for
-					// the interesting ones as optional features, but be aware that the
-					// requestReferenceSpace call will fail if it turns out to be unavailable.
-					// ('local' is always available for immersive sessions and doesn't need to
-					// be requested separately.)
-
-					var sessionInit = { optionalFeatures: [ 'local-floor', 'bounded-floor' ] };
-					navigator.xr.requestSession( 'immersive-vr', sessionInit ).then( onSessionStarted );
+					onSessionAvailable();
 
 				} else {
 
@@ -81,6 +92,8 @@ var VRButton = {
 				}
 
 			};
+
+			navigator.xr.addEventListener( 'sessionavailable', onSessionAvailable );
 
 		}
 
