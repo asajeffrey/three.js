@@ -36,11 +36,31 @@ function WebXRManager( renderer, gl ) {
 	cameraR.layers.enable( 2 );
 	cameraR.viewport = new Vector4();
 
-	const cameras = [ cameraL, cameraR ];
+	const cameraF = new PerspectiveCamera();
+	cameraF.layers.enable( 3 );
+	cameraF.viewport = new Vector4();
+
+	const cameraB = new PerspectiveCamera();
+	cameraB.layers.enable( 4 );
+	cameraB.viewport = new Vector4();
+
+	const cameraU = new PerspectiveCamera();
+	cameraU.layers.enable( 5 );
+	cameraU.viewport = new Vector4();
+
+	const cameraD = new PerspectiveCamera();
+	cameraD.layers.enable( 6 );
+	cameraD.viewport = new Vector4();
+
+	const cameras = [ cameraL, cameraR, cameraF, cameraB, cameraU, cameraD ];
 
 	const cameraVR = new ArrayCamera();
 	cameraVR.layers.enable( 1 );
 	cameraVR.layers.enable( 2 );
+	cameraVR.layers.enable( 3 );
+	cameraVR.layers.enable( 4 );
+	cameraVR.layers.enable( 5 );
+	cameraVR.layers.enable( 6 );
 
 	let _currentDepthNear = null;
 	let _currentDepthFar = null;
