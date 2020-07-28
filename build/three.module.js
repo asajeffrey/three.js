@@ -23867,6 +23867,7 @@ function WebVRManager( renderer ) {
 	var tempQuaternion = new Quaternion();
 	var tempPosition = new Vector3();
 
+	console.log("THREE.WebVRManager: patched to support six cameras");
 	var cameraL = new PerspectiveCamera();
 	cameraL.viewport = new Vector4();
 	cameraL.layers.enable( 1 );
@@ -23875,9 +23876,29 @@ function WebVRManager( renderer ) {
 	cameraR.viewport = new Vector4();
 	cameraR.layers.enable( 2 );
 
-	var cameraVR = new ArrayCamera( [ cameraL, cameraR ] );
+	var cameraU = new PerspectiveCamera();
+	cameraU.viewport = new Vector4();
+	cameraU.layers.enable( 3 );
+
+	var cameraD = new PerspectiveCamera();
+	cameraD.viewport = new Vector4();
+	cameraD.layers.enable( 4 );
+
+	var cameraF = new PerspectiveCamera();
+	cameraF.viewport = new Vector4();
+	cameraF.layers.enable( 5 );
+
+	var cameraB = new PerspectiveCamera();
+	cameraB.viewport = new Vector4();
+	cameraB.layers.enable( 6 );
+
+	var cameraVR = new ArrayCamera( [ cameraL, cameraR, cameraU, cameraD, cameraF, cameraB ] );
 	cameraVR.layers.enable( 1 );
 	cameraVR.layers.enable( 2 );
+	cameraVR.layers.enable( 3 );
+	cameraVR.layers.enable( 4 );
+	cameraVR.layers.enable( 5 );
+	cameraVR.layers.enable( 6 );
 
 	//
 
@@ -24303,7 +24324,7 @@ function WebXRManager( renderer, gl ) {
 	}
 
 	//
-
+	console.log("THREE.WebXRManager: patched to support six cameras");
 	var cameraL = new PerspectiveCamera();
 	cameraL.layers.enable( 1 );
 	cameraL.viewport = new Vector4();
@@ -24312,11 +24333,31 @@ function WebXRManager( renderer, gl ) {
 	cameraR.layers.enable( 2 );
 	cameraR.viewport = new Vector4();
 
-	var cameraVR = new ArrayCamera( [ cameraL, cameraR ] );
+	var cameraU = new PerspectiveCamera();
+	cameraU.layers.enable( 3 );
+	cameraU.viewport = new Vector4();
+
+	var cameraD = new PerspectiveCamera();
+	cameraD.layers.enable( 4 );
+	cameraD.viewport = new Vector4();
+
+	var cameraF = new PerspectiveCamera();
+	cameraF.layers.enable( 5 );
+	cameraF.viewport = new Vector4();
+
+	var cameraB = new PerspectiveCamera();
+	cameraB.layers.enable( 6 );
+	cameraB.viewport = new Vector4();
+
+	var cameraVR = new ArrayCamera( [ cameraL, cameraR, cameraU, cameraD, cameraF, cameraB ] );
 	cameraVR.layers.enable( 1 );
 	cameraVR.layers.enable( 2 );
+	cameraVR.layers.enable( 3 );
+	cameraVR.layers.enable( 4 );
+	cameraVR.layers.enable( 5 );
+	cameraVR.layers.enable( 6 );
 
-	var poseMatrix = new THREE.Matrix4();
+	var poseMatrix = new Matrix4();
 
 	//
 
@@ -33753,8 +33794,6 @@ function CircleBufferGeometry( radius, segments, thetaStart, thetaLength ) {
 CircleBufferGeometry.prototype = Object.create( BufferGeometry.prototype );
 CircleBufferGeometry.prototype.constructor = CircleBufferGeometry;
 
-
-
 var Geometries = /*#__PURE__*/Object.freeze({
 	__proto__: null,
 	WireframeGeometry: WireframeGeometry,
@@ -34666,8 +34705,6 @@ LineDashedMaterial.prototype.copy = function ( source ) {
 	return this;
 
 };
-
-
 
 var Materials = /*#__PURE__*/Object.freeze({
 	__proto__: null,
@@ -38977,8 +39014,6 @@ SplineCurve.prototype.fromJSON = function ( json ) {
 	return this;
 
 };
-
-
 
 var Curves = /*#__PURE__*/Object.freeze({
 	__proto__: null,
