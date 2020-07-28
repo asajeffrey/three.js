@@ -43,6 +43,7 @@ function WebVRManager( renderer ) {
 	var tempQuaternion = new Quaternion();
 	var tempPosition = new Vector3();
 
+	console.log("THREE.WebVRManager: patched to support six cameras");
 	var cameraL = new PerspectiveCamera();
 	cameraL.viewport = new Vector4();
 	cameraL.layers.enable( 1 );
@@ -51,9 +52,29 @@ function WebVRManager( renderer ) {
 	cameraR.viewport = new Vector4();
 	cameraR.layers.enable( 2 );
 
-	var cameraVR = new ArrayCamera( [ cameraL, cameraR ] );
+	var cameraU = new PerspectiveCamera();
+	cameraU.viewport = new Vector4();
+	cameraU.layers.enable( 3 );
+
+	var cameraD = new PerspectiveCamera();
+	cameraD.viewport = new Vector4();
+	cameraD.layers.enable( 4 );
+
+	var cameraF = new PerspectiveCamera();
+	cameraF.viewport = new Vector4();
+	cameraF.layers.enable( 5 );
+
+	var cameraB = new PerspectiveCamera();
+	cameraB.viewport = new Vector4();
+	cameraB.layers.enable( 6 );
+
+	var cameraVR = new ArrayCamera( [ cameraL, cameraR, cameraU, cameraD, cameraF, cameraB ] );
 	cameraVR.layers.enable( 1 );
 	cameraVR.layers.enable( 2 );
+	cameraVR.layers.enable( 3 );
+	cameraVR.layers.enable( 4 );
+	cameraVR.layers.enable( 5 );
+	cameraVR.layers.enable( 6 );
 
 	//
 

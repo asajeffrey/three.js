@@ -35,7 +35,7 @@ function WebXRManager( renderer, gl ) {
 	}
 
 	//
-
+	console.log("THREE.WebXRManager: patched to support six cameras");
 	var cameraL = new PerspectiveCamera();
 	cameraL.layers.enable( 1 );
 	cameraL.viewport = new Vector4();
@@ -44,9 +44,29 @@ function WebXRManager( renderer, gl ) {
 	cameraR.layers.enable( 2 );
 	cameraR.viewport = new Vector4();
 
-	var cameraVR = new ArrayCamera( [ cameraL, cameraR ] );
+	var cameraU = new PerspectiveCamera();
+	cameraU.layers.enable( 3 );
+	cameraU.viewport = new Vector4();
+
+	var cameraD = new PerspectiveCamera();
+	cameraD.layers.enable( 4 );
+	cameraD.viewport = new Vector4();
+
+	var cameraF = new PerspectiveCamera();
+	cameraF.layers.enable( 5 );
+	cameraF.viewport = new Vector4();
+
+	var cameraB = new PerspectiveCamera();
+	cameraB.layers.enable( 6 );
+	cameraB.viewport = new Vector4();
+
+	var cameraVR = new ArrayCamera( [ cameraL, cameraR, cameraU, cameraD, cameraF, cameraB ] );
 	cameraVR.layers.enable( 1 );
 	cameraVR.layers.enable( 2 );
+	cameraVR.layers.enable( 3 );
+	cameraVR.layers.enable( 4 );
+	cameraVR.layers.enable( 5 );
+	cameraVR.layers.enable( 6 );
 
 	var poseMatrix = new Matrix4();
 
